@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IInitialUserData } from "./authSlice.types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IInitialUserData, IUserData } from "./authSlice.types";
 import { Status } from "@/lib/types/global.types";
 
 const initialStateData: IInitialUserData = {
@@ -13,10 +13,24 @@ const initialStateData: IInitialUserData = {
 
 }
 
-createSlice({
+const userSlice = createSlice({
     name: 'auth',
     initialState: initialStateData,
     reducers: {
 
+        setUser(state: IInitialUserData, action: PayloadAction<IUserData>) {
+            state.user = action.payload
+
+        },
+
+        setStatus(state: IInitialUserData, action: PayloadAction<Status>) {
+            state.status = action.payload
+
+        }
+
     }
 })
+
+const { setUser, setStatus } = userSlice.actions
+export default userSlice.reducer
+export { setUser, setStatus }
