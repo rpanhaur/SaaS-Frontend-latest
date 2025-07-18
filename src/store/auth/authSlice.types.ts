@@ -9,4 +9,4 @@ export interface IUserData {
 export interface IInitialUserData {
     user: IUserData,
     status: Status
-}                       
+}                           
