@@ -1,5 +1,7 @@
+"use client";
 import { ChangeEvent, FormEvent, useState } from "react"
 import { IRegisterData } from "./register.types"
+<<<<<<< HEAD
 import { appDispatch } from "@/store/hooks"
 import { userRegister } from "@/store/auth/authSlice"
 
@@ -8,9 +10,20 @@ const Register = () => {
     const dispatch = appDispatch()
 
     //USER le inputfiled ma type gare  ko kura track garera store garne 
+=======
+import { registerUser } from "@/store/auth/authSlice"
+import { Status } from "@/lib/types/global.types"
+import { useAppDispatch } from "@/store/hooks"
+
+const Register = () => {
+
+    const dispatch=useAppDispatch()
+
+    //USER le input filed ma type gare  ko kura track garera store garne 
+>>>>>>> a84430f (login usccess)
 
     const [data, setData] = useState<IRegisterData>({
-        username: "",
+        userName: "",
         email: "",
         password: ""
 
@@ -33,12 +46,22 @@ const Register = () => {
     //from submissition function creation 
 
     const handelFormSubmission = (e: FormEvent<HTMLFormElement>) => {
+        //TO prevent page load
+        e.preventDefault()
+
+        //api call
+
+       
+        
+        dispatch(registerUser(data))
+        
 
         dispatch(userRegister(data))
 
 
 
     }
+    console.log(data);
 
 
     return (
@@ -56,7 +79,7 @@ const Register = () => {
                             <div>
                                 <label htmlFor="new-password" className="block text-sm font-medium text-gray-700">Username</label>
                                 <div className="mt-1">
-                                    <input onChange={handelRegisterDataChange} name="username" type="username" required className="px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm" />
+                                    <input onChange={handelRegisterDataChange} name="userName" type="userName" required className="px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm" />
                                 </div>
                             </div>
                             <div>

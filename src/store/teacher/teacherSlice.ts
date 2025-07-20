@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ITeacherData, ITeacherInitailData } from "./teacher.types";
 import { Status } from "@/lib/types/global.types";
@@ -52,3 +53,44 @@ export function createTeacher(data: ITeacherInitailData) {
 
     }
 }
+=======
+import { Status } from "@/lib/types/global.types";
+import { createSlice,PayloadAction } from "@reduxjs/toolkit";
+import { ITeacherData, ITeacherInitialData, TeacherExpert } from "./teacher.types";
+
+const teacherData: ITeacherData = {
+    teacher: {
+    teacherName: "",
+    teacherEmail: "",
+    teacherPhoneNumber: "",
+    teacherExperience: TeacherExpert.Pro,
+    teacherSubject: "",
+    course: {
+      courseName: "",
+      coursePrice: "",
+      courseDuration: "",
+    },
+  },
+
+  status: Status.LOADING,
+};
+
+const teacherSlice = createSlice({
+  name: "teacher-slice",
+  initialState: teacherData,
+  reducers: {
+
+    setTeacher(state:ITeacherData,action:PayloadAction<ITeacherInitialData>){
+
+        state.teacher=action.payload
+
+    },
+    setStatus(state:ITeacherData,action:PayloadAction<Status>){
+        state.status=action.payload
+    }
+  },
+});
+
+export const {setTeacher,setStatus}=teacherSlice.actions
+export default teacherSlice.reducer
+>>>>>>> a84430f (login usccess)
