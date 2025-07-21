@@ -1,13 +1,13 @@
 "use client"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { ILoginData } from "./login-types"
-import { useAppDispatch, useAppSelector } from "@/store/hooks"
+import { appDispatch, appSelector} from "@/store/hooks"
 import { loginUser } from "@/store/auth/authSlice"
 
 const Login = () => {
 
-    const dispatch=useAppDispatch()
-    const {user}=useAppSelector((store)=>store.auth)
+    const dispatch=appDispatch()
+    const {user}=appSelector((store)=>store.auth)
     console.log(user,'check the value of state ma ke set bha ko cha');
     
 

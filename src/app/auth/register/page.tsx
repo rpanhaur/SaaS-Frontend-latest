@@ -1,26 +1,14 @@
 "use client";
 import { ChangeEvent, FormEvent, useState } from "react"
 import { IRegisterData } from "./register.types"
-<<<<<<< HEAD
 import { appDispatch } from "@/store/hooks"
-import { userRegister } from "@/store/auth/authSlice"
+import { registerUser } from "@/store/auth/authSlice"
 
 const Register = () => {
 
     const dispatch = appDispatch()
 
     //USER le inputfiled ma type gare  ko kura track garera store garne 
-=======
-import { registerUser } from "@/store/auth/authSlice"
-import { Status } from "@/lib/types/global.types"
-import { useAppDispatch } from "@/store/hooks"
-
-const Register = () => {
-
-    const dispatch=useAppDispatch()
-
-    //USER le input filed ma type gare  ko kura track garera store garne 
->>>>>>> a84430f (login usccess)
 
     const [data, setData] = useState<IRegisterData>({
         userName: "",
@@ -49,19 +37,16 @@ const Register = () => {
         //TO prevent page load
         e.preventDefault()
 
-        //api call
-
-       
+        //api call           
+      
         
+
         dispatch(registerUser(data))
-        
-
-        dispatch(userRegister(data))
 
 
 
     }
-    console.log(data);
+   
 
 
     return (

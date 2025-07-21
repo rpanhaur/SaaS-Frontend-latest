@@ -1,23 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IInitialUserData, ILoginUser, IUserData } from "./authSlice.types";
 import { Status } from "@/lib/types/global.types";
-<<<<<<< HEAD
-import API from "@/lib/http";
-
 import { AppDispatch } from "../store";
+import API from '../../lib/http/api'
 
-=======
-import { AppDispatch } from "../store";
-import API from "@/lib/http";
-
->>>>>>> a84430f (login usccess)
 
 const initialStateData: IInitialUserData = {
 
     user: {
         userName: "",
+        email:"",
+        password:""
         
-        token: ""
+        
     },
     status: Status.LOADING
 
@@ -41,56 +36,6 @@ const authSlice = createSlice({
     }
 })
 
-<<<<<<< HEAD
-export const { setUser, setStatus } = authSlice.actions
-export default authSlice.reducer
-
-export function userRegister(data: IUserData) {
-    return async function userRegisterThunk(dispatch: AppDispatch) {
-
-        try {
-
-            const response = await API.post("/auth/register", data)
-            if (response.status == 200) {
-                dispatch(setStatus(Status.SUCCESS))
-
-            }
-            dispatch(setStatus(Status.ERROR))
-
-        } catch (error) {
-
-            console.log(error);
-            dispatch(setStatus(Status.ERROR))
-
-
-        }
-
-    }
-}
-
-export function loginUser(data: any) {
-
-    return async function loginUserThunk(dispatch: AppDispatch) {
-
-        try {
-
-            const response = await API.post('/auth/login', data)
-
-            if (response.status == 200) {
-
-                dispatch(setStatus(Status.SUCCESS))
-            } else {
-                dispatch(setStatus(Status.ERROR))
-            }
-
-        } catch (error) {
-
-            console.log(error);
-            dispatch(setStatus(Status.ERROR))
-
-
-        }
-=======
 const { setUser, setStatus } = authSlice.actions
 export default authSlice.reducer
 export { setUser, setStatus }
@@ -122,6 +67,7 @@ export function loginUser(data:ILoginUser){
         try {
 
             const response=await API.post('/auth/login',data)
+            localStorage.setItem('token',response.data.data.token)
 
             if(response.status==200)
             dispatch(setUser(response.data.data))
@@ -137,6 +83,5 @@ export function loginUser(data:ILoginUser){
             
         }
 
->>>>>>> a84430f (login usccess)
     }
 }
