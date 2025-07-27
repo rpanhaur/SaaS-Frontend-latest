@@ -5,8 +5,8 @@ const APIWITHTOKEN = axios.create({
   headers: {
     Authorization: localStorage.getItem("token") !==null || localStorage.getItem("token") !==undefined || localStorage.getItem("token") !=="" ? localStorage.getItem("token") : null,
     "Content-Type": "application/json",
-    Accept: "application/json",
-  },
+    Accept: "application/json"
+  }
 });
 
 export default APIWITHTOKEN;
