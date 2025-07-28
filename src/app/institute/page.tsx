@@ -164,7 +164,7 @@ export default function CreateInstitutePage() {
     institutePanNo: '',
   });
 
-  console.log(instituteData,'check data is coming form form or not');
+ 
   
 
   // ✅ Handles input change and updates state

@@ -1,10 +1,18 @@
 "use client";
-import { ChangeEvent, FormEvent, useState } from "react"
+
+import { ChangeEvent, FormEvent,  useState } from "react"
 import { IRegisterData } from "./register.types"
-import { appDispatch } from "@/store/hooks"
+import { appDispatch, appSelector } from "@/store/hooks"
 import { registerUser } from "@/store/auth/authSlice"
 
-const Register = () => {
+
+
+
+
+const Register = () => { 
+
+   
+       
 
     const dispatch = appDispatch()
 
@@ -33,20 +41,20 @@ const Register = () => {
 
     //from submissition function creation 
 
-    const handelFormSubmission = (e: FormEvent<HTMLFormElement>) => {
+     const handelFormSubmission = async(e: FormEvent<HTMLFormElement>) => {
         //TO prevent page load
         e.preventDefault()
 
-        //api call           
-      
+        //api call                
         
 
-        dispatch(registerUser(data))
+        await dispatch(registerUser(data))
+      
 
-
-
+     
     }
-   
+
+
 
 
     return (

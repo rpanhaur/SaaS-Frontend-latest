@@ -19,6 +19,7 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex space-x-8 items-center">
+            <NavLink href="/institute/dashboard" text=" Institute Dashboard" />
             <NavLink href="/" text="Home" />
             <NavLink href="/auth/register" text="Sign Up" />
             <NavLink href="/auth/login" text="Sign In" />

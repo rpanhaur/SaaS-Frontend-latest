@@ -1,12 +1,35 @@
+// import axios from "axios";
+
+// const APIWITHTOKEN = axios.create({
+//   baseURL: "http://localhost:4000/api",
+//   headers: {
+//     Authorization: localStorage.getItem("token") !==null || localStorage.getItem("token") !==undefined || localStorage.getItem("token") !=="" ? localStorage.getItem("token") : null,
+//     "Content-Type": "application/json",
+//     Accept: "application/json",
+//   },
+// });
+
+// export default APIWITHTOKEN;
+
 import axios from "axios";
 
 const APIWITHTOKEN = axios.create({
   baseURL: "http://localhost:4000/api",
   headers: {
-    Authorization: localStorage.getItem("token") !==null || localStorage.getItem("token") !==undefined || localStorage.getItem("token") !=="" ? localStorage.getItem("token") : null,
     "Content-Type": "application/json",
     Accept: "application/json",
   },
 });
 
+APIWITHTOKEN.interceptors.request.use((config) => {
+  if (typeof window !== "undefined") { // only run in client
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  }
+  return config;
+});
+
 export default APIWITHTOKEN;
+
