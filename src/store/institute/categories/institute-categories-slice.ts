@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Status } from "@/lib/types/global.types";
-import { ICategoryData, ICategoryInitialData } from "./institue-categories-types";
+import { ICategoryAddData, ICategoryData, ICategoryInitialData } from "./institue-categories-types";
 import { AppDispatch } from "@/store/store";
 import APIWITHTOKEN from "@/lib/http/apiwithtoken";
+
 
 
 const categoriesData: ICategoryInitialData = {
@@ -15,8 +16,8 @@ const instituteCategoriesSlice = createSlice({
     initialState: categoriesData,
     reducers: {
 
-        setCategory(state: ICategoryInitialData, action: PayloadAction<ICategoryData[]>) {
-            state.category = action.payload
+        setCategory(state: ICategoryInitialData, action: PayloadAction<ICategoryData>) {
+            state.category.push(action.payload)
         },
         setStatus(state: ICategoryInitialData, action: PayloadAction<Status>) {
             state.status = action.payload
@@ -36,15 +37,16 @@ export const { setCategory, setStatus, setCategoryDelete } = instituteCategories
 export default instituteCategoriesSlice.reducer
 
 
-export function createCategory(data: ICategoryData) {
+export function createCategory(data: ICategoryAddData) {
     return async function createCategoryThunk(dispatch: AppDispatch) {
 
         try {
 
-            const response = await APIWITHTOKEN.post('/institue/category', data)
+            const response = await APIWITHTOKEN.post('/institute/category', data)
 
             if (response.status == 200) {
                 dispatch(setStatus(Status.SUCCESS))
+
                 response.data.data > 0 && dispatch(setCategory(response.data.data))
 
             } else {
@@ -65,7 +67,7 @@ export function createCategory(data: ICategoryData) {
 export function deleteCategory(id: string) {
     return async function deleteCategoryThunk(dispatch: AppDispatch) {
         try {
-            const response = await APIWITHTOKEN.delete('/institue/category/' + id)
+            const response = await APIWITHTOKEN.delete('/institute/category/' + id)
             if (response.status == 200) {
                 dispatch(setStatus(Status.SUCCESS))
                 dispatch(setCategoryDelete(id))

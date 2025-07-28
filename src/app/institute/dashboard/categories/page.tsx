@@ -30,7 +30,7 @@ function InstituteCategory() {
         <div className="flex flex-col">
             <div className=" overflow-x-auto">
 
-                {isModalOpen && <ModalPopup />}
+                {isModalOpen && <ModalPopup closeModal={closeModal}/>}
 
                 <div className="min-w-full inline-block align-middle">
                     <div className="relative  text-gray-500 focus-within:text-gray-900 mb-4 flex justify-between" >
