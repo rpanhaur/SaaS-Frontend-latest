@@ -8,7 +8,7 @@ export interface ICategoryAddData{
 export interface ICategoryData extends ICategoryAddData{
   id:string,
 
-  categoryCreatedAt:string
+  createdAt:string
 }
 
 export interface ICategoryInitialData{

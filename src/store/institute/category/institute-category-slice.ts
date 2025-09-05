@@ -20,8 +20,13 @@ const categorySlice=createSlice({
   initialState:categoryInitIalData,
   reducers:{
 
-    setCategory(state:ICategoryInitialData,action:PayloadAction<ICategoryData>){
+    setAddCategoryData(state:ICategoryInitialData,action:PayloadAction<ICategoryData>){    
+      
       state.category.push(action.payload)
+    },
+    setFetchCategory(state:ICategoryInitialData,action:PayloadAction<ICategoryData[]>){
+
+    state.category=action.payload
     },
     setStatus(state:ICategoryInitialData,action:PayloadAction<Status>){
       state.status=action.payload
@@ -37,7 +42,7 @@ const categorySlice=createSlice({
   }
 })
 
-export const {setCategory,setStatus,setCategoryDelete}=categorySlice.actions
+export const {setAddCategoryData,setFetchCategory,setStatus,setCategoryDelete}=categorySlice.actions
 export default categorySlice.reducer
 
 
@@ -49,6 +54,7 @@ export function createCategory(data:ICategoryAddData){
       if(response.status==200)
 
       dispatch(setStatus(Status.SUCCESS))
+      response.data.data && dispatch(setAddCategoryData(response.data.data))
   
   
    
@@ -69,12 +75,11 @@ export function fetchCategory(){
       const response=await APIWITHTOKEN.get('/institute/category')
 
       if (response.status==200){
-        dispatch(setStatus(Status.SUCCESS))
-
+        dispatch(setStatus(Status.SUCCESS))      
        
+                       
         
-
-        response.data.data >0 && dispatch(setCategory(response.data.data))
+       response.data.data.length > 0 && dispatch(setFetchCategory(response.data.data))
 
       }else{
         dispatch(setStatus(Status.ERROR))
@@ -98,12 +103,16 @@ export function fetchCategory(){
 export function deleteCategory(id:string){
   return async function deleteCategoryThunk(dispatch:AppDispatch){
 
+   
+    
+
     try {
       
-      const response=await APIWITHTOKEN.delete('/institute/category' + id)
+      const response=await APIWITHTOKEN.delete('/institute/category/' + id)
       if(response.status==200){
         dispatch(setStatus(Status.SUCCESS))
         dispatch(setCategoryDelete(id))
+        
       }else{
         dispatch(setStatus(Status.ERROR))
       }

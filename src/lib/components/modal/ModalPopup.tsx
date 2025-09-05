@@ -1,7 +1,7 @@
 'use client'
 import { Status } from "@/lib/types/global.types"
 import { appDispatch, appSelector } from "@/store/hooks"
-import { createCategory } from "@/store/institute/category/institute-category-slice"
+import { createCategory, fetchCategory } from "@/store/institute/category/institute-category-slice"
 import { ICategoryAddData } from "@/store/institute/category/institute-category-types"
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 
@@ -35,12 +35,13 @@ const ModalPopup:React.FC<ICategoryClose>=({closeModal})=>{
     if(status==Status.SUCCESS){
       closeModal()
     }
-
-
-
    
 
   }
+  useEffect(()=>{
+    dispatch(fetchCategory())
+
+  },[])
 
 
   return(

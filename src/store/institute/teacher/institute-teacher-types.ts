@@ -1,7 +1,7 @@
 import { Status } from "@/lib/types/global.types";
 
-export enum teacherExperties {
-    Beginer = 'beginer',
+export enum teacherExpertise {
+    Beginner = 'beginner',
     Intermediate = 'intermediate',
     Pro = 'pro'
 }
@@ -12,18 +12,22 @@ interface IInstituteTeacherCourse {
     courseThumbnail: string
 }
 
-export interface IInstituteTeacherInitailData {
+export interface IInstituteTeacherInitialData {
     teacherName: string,
     teacherAddress: string,
     teacherEmail: string,
-    teacherPhone: string,
-    teacherExperties: teacherExperties,
-    teacherSallary: string,
-    teacherJoinDate: string,
-    course: IInstituteTeacherCourse
+    teacherPhoneNumber: string,
+    teacherExperience: string,
+    teacherSalary: string,
+    teacherJoinedDate: string,
+    courseId: IInstituteTeacherCourse ,
+    teacherPhoto:string
+}
+export interface IInstituteTeacherData extends IInstituteTeacherInitialData{
+    id:string
 }
 
-export interface IInstituteTeacherData {
-    instituteTeacher: IInstituteTeacherInitailData,
+export interface IInstituteFinalData {
+    instituteTeacher: IInstituteTeacherData[],
     status: Status
 }
