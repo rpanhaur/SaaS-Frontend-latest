@@ -9,10 +9,11 @@ const initialStateData: IInitialUserData = {
 
     user: {
         userName: "",
-        email:"",
-        password:""
-        
-        
+        email: "",
+        password: "",
+        role: ""
+
+
     },
     status: Status.LOADING
 
@@ -40,47 +41,47 @@ const { setUser, setStatus } = authSlice.actions
 export default authSlice.reducer
 export { setUser, setStatus }
 
-export function registerUser(data:IUserData){
-    return async function registerUserThunk(dispatch:AppDispatch){
+export function registerUser(data: IUserData) {
+    return async function registerUserThunk(dispatch: AppDispatch) {
         try {
-            const response=await API.post('/auth/register',data)
+            const response = await API.post('/auth/register', data)
             console.log(response);
-            
-            if(response.status==200){
+
+            if (response.status == 200) {
 
                 dispatch(setStatus(Status.SUCCESS))
-            }else{
+            } else {
                 dispatch(setStatus(Status.ERROR))
             }
-            
+
         } catch (error) {
             console.log(error);
             dispatch(setStatus(Status.ERROR))
-            
-            
+
+
         }
     }
 }
 
-export function loginUser(data:ILoginUser){
-    return async function loginUserThunk(dispatch:AppDispatch){
+export function loginUser(data: ILoginUser) {
+    return async function loginUserThunk(dispatch: AppDispatch) {
         try {
 
-            const response=await API.post('/auth/login',data)
-            localStorage.setItem('token',response.data.data.token)
+            const response = await API.post('/auth/login', data)
+            localStorage.setItem('token', response.data.data.token)
 
-            if(response.status==200)
-            dispatch(setUser(response.data.data))
-        //to add token in local storage
+            if (response.status == 200)
+                dispatch(setUser(response.data.data))
+            //to add token in local storage
 
-        localStorage.setItem("token",response.data.data.token)
+            localStorage.setItem("token", response.data.data.token)
             dispatch(setStatus(Status.SUCCESS))
-            
+
         } catch (error) {
             console.log(error);
             dispatch(setStatus(Status.ERROR))
-            
-            
+
+
         }
 
     }
